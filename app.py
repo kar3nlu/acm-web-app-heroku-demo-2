@@ -17,7 +17,6 @@ db = SQLAlchemy(app)
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
 from models import Post
-db.create_all()
 
 @app.route('/', methods=['GET'])
 def index():

@@ -32,13 +32,13 @@ def about():
 
 @app.route('/get_posts', methods=['GET'])
 def get_posts():
-    # posts = Post.query.order_by(Post.id.desc())
+    posts = Post.query.order_by(Post.id.desc())
     formatted_posts = []
-    # for post in posts:
-    #     formatted_posts.append({
-    #         "date": post.date.strftime("%m/%d/%y"),
-    #         "text": post.post_text,
-    #     })
+    for post in posts:
+        formatted_posts.append({
+            "date": post.date.strftime("%m/%d/%y"),
+            "text": post.post_text,
+        })
     return jsonify({
         "posts": formatted_posts,
     })

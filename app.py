@@ -1,4 +1,6 @@
 #app.py
+import os
+
 from datetime import date
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy

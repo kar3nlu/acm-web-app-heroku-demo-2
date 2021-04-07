@@ -8,16 +8,16 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Point SQLAlchemy to your Heroku database
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 # Gets rid of a warning
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-db.create_all()
 
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
 from models import Post
+db.create_all()
 
 @app.route('/', methods=['GET'])
 def index():

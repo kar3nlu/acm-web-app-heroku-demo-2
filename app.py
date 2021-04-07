@@ -4,6 +4,7 @@ import os
 from datetime import date
 from flask import Flask, jsonify, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 
@@ -14,13 +15,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate()
-
-db.init_app(app)
 migrate.init_app(app, db)
 
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
 from models import Post
+db.create_all()
 
 @app.route('/', methods=['GET'])
 def index():
@@ -32,13 +32,13 @@ def about():
 
 @app.route('/get_posts', methods=['GET'])
 def get_posts():
-    posts = Post.query.order_by(Post.id.desc())
+    # posts = Post.query.order_by(Post.id.desc())
     formatted_posts = []
-    for post in posts:
-        formatted_posts.append({
-            "date": post.date.strftime("%m/%d/%y"),
-            "text": post.post_text,
-        })
+    # for post in posts:
+    #     formatted_posts.append({
+    #         "date": post.date.strftime("%m/%d/%y"),
+    #         "text": post.post_text,
+    #     })
     return jsonify({
         "posts": formatted_posts,
     })

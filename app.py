@@ -8,7 +8,8 @@ from flask_migrate import Migrate
 
 app = Flask(__name__)
 
-# Point SQLAlchemy to your Heroku database
+# Points SQLAlchemy to Heroku database
+# Replaces postgres:// with postgresql://
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL').replace("://", "ql://", 1)
 # Gets rid of a warning
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

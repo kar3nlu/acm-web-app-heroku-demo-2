@@ -13,6 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL').replace("://",
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+db.create_all()
 
 # IMPORTANT: This must be AFTER creating db variable to prevent
 # circular import issues
